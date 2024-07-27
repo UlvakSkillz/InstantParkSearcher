@@ -1,5 +1,8 @@
 ﻿using MelonLoader;
-using RUMBLE.Environment;
+using Il2CppRUMBLE.Environment;
+using Il2CppRUMBLE.Interactions.InteractionBase;
+using RumbleModdingAPI;
+using System.Collections;
 using UnityEngine;
 
 namespace InstantParkSearcher
@@ -7,31 +10,35 @@ namespace InstantParkSearcher
     public class main : MelonMod
     {
         ParkBoardGymVariant parkBoardGymVariant;
-        private string currentScene = "";
-        private bool sceneChanged = false;
+        InteractionSlider interactionSlider;
+        private string currentScene = "Loader";
 
-        public override void OnFixedUpdate()
+        public override void OnLateInitializeMelon()
         {
-            if (sceneChanged)
+            Calls.onMapInitialized += Init;
+        }
+
+        private void Init()
+        {
+            if (currentScene == "Gym")
             {
-                try
-                {
-                    if (currentScene == "Gym")
-                    {
-                        parkBoardGymVariant = GameObject.Find("--------------LOGIC--------------/Heinhouser products/Parkboard").GetComponent<ParkBoardGymVariant>();
-                        parkBoardGymVariant.OnHostJoinSliderChanged(1);
-                        parkBoardGymVariant.OnFindRandomParkPressed();
-                        sceneChanged = false;
-                    }
-                }
-                catch { }
+                parkBoardGymVariant = Calls.GameObjects.Gym.Logic.HeinhouserProducts.Parkboard.GetGameObject().GetComponent<ParkBoardGymVariant>();
+                interactionSlider = Calls.GameObjects.Gym.Logic.HeinhouserProducts.Parkboard.PrimaryDisplay.GetGameObject().transform.GetChild(1).GetChild(0).GetChild(2).GetChild(8).gameObject.GetComponent<InteractionSlider>();
+                interactionSlider.SetStep(1, false, false);
+                MelonCoroutines.Start(ParkSearch());
             }
+        }
+
+        public IEnumerator ParkSearch()
+        {
+            yield return new WaitForSeconds(1);
+            parkBoardGymVariant.OnFindRandomParkPressed();
+            yield break;
         }
 
         public override void OnSceneWasLoaded(int buildIndex, string sceneName)
         {
             currentScene = sceneName;
-            sceneChanged = true;
         }
     }
 }
