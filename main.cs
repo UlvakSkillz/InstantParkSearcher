@@ -22,8 +22,8 @@ namespace InstantParkSearcher
         {
             if (currentScene == "Gym")
             {
-                parkBoardGymVariant = Calls.GameObjects.Gym.Logic.HeinhouserProducts.Parkboard.GetGameObject().GetComponent<ParkBoardGymVariant>();
-                interactionSlider = Calls.GameObjects.Gym.Logic.HeinhouserProducts.Parkboard.PrimaryDisplay.GetGameObject().transform.GetChild(1).GetChild(0).GetChild(2).GetChild(8).gameObject.GetComponent<InteractionSlider>();
+                parkBoardGymVariant = Calls.GameObjects.Gym.LOGIC.Heinhouserproducts.Parkboard.GetGameObject().GetComponent<ParkBoardGymVariant>();
+                interactionSlider = Calls.GameObjects.Gym.LOGIC.Heinhouserproducts.Parkboard.PrimaryDisplay.GetGameObject().transform.GetChild(1).GetChild(0).GetChild(2).GetChild(8).gameObject.GetComponent<InteractionSlider>();
                 interactionSlider.SetStep(1, false, false);
                 MelonCoroutines.Start(ParkSearch());
             }

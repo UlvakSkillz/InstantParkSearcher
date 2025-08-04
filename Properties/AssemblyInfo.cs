@@ -4,7 +4,7 @@ using MelonLoader;
 using InstantParkSearcher; // The namespace of your mod class
 using System;
 // ...
-[assembly: MelonInfo(typeof(main), "Instant Park Searcher", "2.0.1", "UlvakSkillz")]
+[assembly: MelonInfo(typeof(main), "Instant Park Searcher", "2.1.0", "UlvakSkillz")]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
 [assembly: MelonColor(255, 195, 0, 255)]
 [assembly: MelonAuthorColor(255, 195, 0, 255)]
