@@ -4,11 +4,11 @@ using MelonLoader;
 using InstantParkSearcher; // The namespace of your mod class
 using System;
 // ...
-[assembly: MelonInfo(typeof(main), "Instant Park Searcher", "2.1.0", "UlvakSkillz")]
+[assembly: MelonInfo(typeof(main), "Instant Park Searcher", "2.2.0", "UlvakSkillz")]
 [assembly: MelonGame("Buckethead Entertainment", "RUMBLE")]
 [assembly: MelonColor(255, 195, 0, 255)]
 [assembly: MelonAuthorColor(255, 195, 0, 255)]
-[assembly: VerifyLoaderVersion(0, 6, 2, true)]
+[assembly: VerifyLoaderVersion(0, 7, 0, true)]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information

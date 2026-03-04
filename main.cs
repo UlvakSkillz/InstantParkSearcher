@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using Il2CppRUMBLE.Environment;
 using Il2CppRUMBLE.Interactions.InteractionBase;
-using RumbleModdingAPI;
+using RumbleModdingAPI.RMAPI;
 using System.Collections;
 using UnityEngine;
 
@@ -11,19 +11,18 @@ namespace InstantParkSearcher
     {
         ParkBoardGymVariant parkBoardGymVariant;
         InteractionSlider interactionSlider;
-        private string currentScene = "Loader";
 
         public override void OnLateInitializeMelon()
         {
-            Calls.onMapInitialized += Init;
+            Actions.onMapInitialized += Init;
         }
 
-        private void Init()
+        private void Init(string map)
         {
-            if (currentScene == "Gym")
+            if (map == "Gym")
             {
-                parkBoardGymVariant = Calls.GameObjects.Gym.LOGIC.Heinhouserproducts.Parkboard.GetGameObject().GetComponent<ParkBoardGymVariant>();
-                interactionSlider = Calls.GameObjects.Gym.LOGIC.Heinhouserproducts.Parkboard.PrimaryDisplay.GetGameObject().transform.GetChild(1).GetChild(0).GetChild(2).GetChild(8).gameObject.GetComponent<InteractionSlider>();
+                parkBoardGymVariant = GameObjects.Gym.INTERACTABLES.Parkboard.GetGameObject().GetComponent<ParkBoardGymVariant>();
+                interactionSlider = GameObjects.Gym.INTERACTABLES.Parkboard.PrimaryDisplay.Gym.ParkMode.InteractionSliderHorizontalGrip.Sliderhandle.GetGameObject().GetComponent<InteractionSlider>();
                 interactionSlider.SetStep(1, false, false);
                 MelonCoroutines.Start(ParkSearch());
             }
@@ -34,11 +33,6 @@ namespace InstantParkSearcher
             yield return new WaitForSeconds(1);
             parkBoardGymVariant.OnFindRandomParkPressed();
             yield break;
-        }
-
-        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
-        {
-            currentScene = sceneName;
         }
     }
 }
